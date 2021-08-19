@@ -28,7 +28,9 @@ namespace hr.Infra.Repository
 
         public virtual async Task<TEntity> Get(TEntity entity)
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             return await DbSet.FindAsync(entity);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAll()
@@ -38,7 +40,9 @@ namespace hr.Infra.Repository
 
         public virtual async Task<TEntity> GetById(Guid id)
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             return await DbSet.FindAsync(id);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
 
         public virtual async Task Remove(TEntity entity)
