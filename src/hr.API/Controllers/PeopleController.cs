@@ -1,7 +1,11 @@
 ﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using hr.Domain.Interfaces.Services;
+using hr.API.ViewModels;
+using System.Threading.Tasks;
+using hr.Domain.Models.Entities;
 
 namespace hr.API.Controllers
 {
@@ -10,40 +14,45 @@ namespace hr.API.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly IPeopleService _peopleService;
+        private readonly IMapper _mapper;
 
-        public PeopleController(IPeopleService peopleService)
+        public PeopleController(IPeopleService peopleService, IMapper mapper)
         {
             _peopleService = peopleService;
+            _mapper = mapper;
         }
 
         // GET: api/people
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        public async Task<IEnumerable<PeopleViewModel>> GetAsync()
+        {            
+            return _mapper.Map<IEnumerable<PeopleViewModel>>(await _peopleService.GetAll());
+
         }
 
         // GET api/people/5
-        [HttpGet("{id}")]
-        public string Get(Guid id)
+        [HttpGet("{id:guid}")]
+        public async Task<PeopleViewModel> GetAsync(Guid id)
         {
-            return "value";
+            return _mapper.Map<PeopleViewModel>(await _peopleService.GetById(id));
         }
 
         // POST api/people
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task PostAsync([FromBody] PeopleViewModel people)
         {
+            await _peopleService.Add(_mapper.Map<People>(people));
         }
 
         // PUT api/people/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id:guid}")]
+        public async Task PutAsync(Guid id, [FromBody] PeopleViewModel people)
         {
+            await _peopleService.Set(_mapper.Map<People>(people));
         }
 
         // DELETE api/people/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public void Delete(Guid id)
         {
         }

@@ -13,7 +13,7 @@ namespace hr.API.Config
         {
             services.AddScoped<HrDbContext>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
-            services.AddScoped<IPeopleService, PeopleService>();
+            services.AddScoped<IPeopleService, PeopleService>();            
 
             return services;
         }

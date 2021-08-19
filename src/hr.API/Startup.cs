@@ -1,3 +1,4 @@
+using AutoMapper;
 using hr.API.Config;
 using hr.Infra.Context;
 using Microsoft.AspNetCore.Builder;
@@ -28,8 +29,10 @@ namespace hr.API
             });
             
             services.AddDependencies();
-            
+
             services.AddControllers();
+
+            services.AddAutoMapper(typeof(Startup));
             
             services.AddSwaggerGen(c =>
             {
