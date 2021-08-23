@@ -6,7 +6,7 @@ namespace hr.Domain.Interfaces.Services
 {
     public interface IServiceBase<TEntity> : IDisposable where TEntity : class
     {
-        Task Add(TEntity entity);
+        Task<TEntity> Add(TEntity entity);
 
         Task<IEnumerable<TEntity>> GetAll();
 

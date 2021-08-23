@@ -33,6 +33,8 @@ namespace hr.API
             services.AddControllers();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddCorsConfig();
             
             services.AddSwaggerGen(c =>
             {
@@ -53,6 +55,8 @@ namespace hr.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

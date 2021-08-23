@@ -17,5 +17,21 @@ namespace hr.API.Config
 
             return services;
         }
+
+        public static IServiceCollection AddCorsConfig(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });
+
+            return services;
+        }
     }
 }

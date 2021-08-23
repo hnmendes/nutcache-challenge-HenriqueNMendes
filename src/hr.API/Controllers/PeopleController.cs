@@ -6,6 +6,8 @@ using hr.Domain.Interfaces.Services;
 using hr.API.ViewModels;
 using System.Threading.Tasks;
 using hr.Domain.Models.Entities;
+using Microsoft.AspNetCore.Http;
+using System.Net.Mime;
 
 namespace hr.API.Controllers
 {
@@ -39,9 +41,19 @@ namespace hr.API.Controllers
 
         // POST api/people
         [HttpPost]
-        public async Task PostAsync([FromBody] PeopleViewModel people)
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PostAsync([FromBody] PeopleViewModel people)
         {
-            await _peopleService.Add(_mapper.Map<People>(people));
+            if(people == null)
+            {
+                return BadRequest();
+            }
+
+            var addedPeople = await _peopleService.Add(_mapper.Map<People>(people));
+
+            return new ObjectResult(addedPeople) { StatusCode = StatusCodes.Status201Created };
         }
 
         // PUT api/people/5
@@ -53,8 +65,21 @@ namespace hr.API.Controllers
 
         // DELETE api/people/5
         [HttpDelete("{id:guid}")]
-        public void Delete(Guid id)
+        public async Task<IActionResult> DeleteAsync(Guid id)
         {
+            try
+            {
+                var entity = await _peopleService.GetById(id);
+
+                await _peopleService.Remove(entity);
+
+                return new ObjectResult(null) { StatusCode = StatusCodes.Status204NoContent };
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }            
         }
     }
 }

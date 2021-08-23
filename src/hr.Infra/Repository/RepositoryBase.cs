@@ -20,10 +20,12 @@ namespace hr.Infra.Repository
             DbSet = db.Set<TEntity>();
         }
 
-        public virtual async Task Add(TEntity entity)
+        public virtual async Task<TEntity> Add(TEntity entity)
         {
             Db.Add(entity);
             await SaveChanges();
+
+            return entity; 
         }        
 
         public virtual async Task<TEntity> Get(TEntity entity)
@@ -47,7 +49,7 @@ namespace hr.Infra.Repository
 
         public virtual async Task Remove(TEntity entity)
         {
-            Db.Remove(entity);
+            Db.Remove(entity);            
             await SaveChanges();
         }        
 

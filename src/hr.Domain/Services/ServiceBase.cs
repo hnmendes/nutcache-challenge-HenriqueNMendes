@@ -16,7 +16,7 @@ namespace hr.Domain.Services
             _repositoryBase = repositoryBase;
         }
 
-        public Task Add(TEntity entity)
+        public Task<TEntity> Add(TEntity entity)
         {
             return _repositoryBase.Add(entity);
         }
