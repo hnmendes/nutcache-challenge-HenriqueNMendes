@@ -1,10 +1,10 @@
 # hr
 
-### :warning: Attention to project execution
+## :warning: Attention to project execution
 
 This project was written in .NET 6.0, so we will need this version to execute.
 
-####GIT:
+###GIT:
 
 git clone <PROJECT_URL>
 
@@ -12,7 +12,7 @@ git submodule init
 
 git submodule update
 
-####In the project: 
+###In the project: 
 
  1. No <i>Package Manager Console</i>, digite: 
  
