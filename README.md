@@ -14,7 +14,7 @@ git submodule update
 
 #### In the project: 
 
- 1. No <i>Package Manager Console</i>, digite: 
+ 1. In <i>Package Manager Console</i>, type: 
  
  ```
  Update-Database -ProjectName hr.Infra
