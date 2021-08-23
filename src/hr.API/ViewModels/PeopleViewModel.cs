@@ -11,7 +11,7 @@ namespace hr.API.ViewModels
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "The {0} is required.")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "The {0} is required.")]
         public DateTime BirthDate { get; set; }
@@ -20,15 +20,15 @@ namespace hr.API.ViewModels
         public Gender Gender { get; set; }
 
         [Required(ErrorMessage = "The {0} is required.")]
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "The {0} is required.")]
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "The {0} is required.")]
         [StringLength(11, ErrorMessage = "The {0} must have 11 digits.")]
-        public string? CPF { get; set; }
+        public string CPF { get; set; }
 
-        public Team Team { get; set; }
+        public Team? Team { get; set; }
     }
 }
