@@ -1,0 +1,3 @@
+[submodule "src/hr-FrontEnd"]
+	path = src/hr-FrontEnd
+	url = https://github.com/hnmendes/hr-FrontEnd
